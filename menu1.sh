@@ -10,7 +10,7 @@ do
 		   . ./name_validation.sh
 		   if [ $? ]
 		   then 
-			   mkdir -p /home/bassem/iti/DBMS/$name
+			   mkdir /home/bassem/iti/DBMS/$name
 		   fi
 		       	;;
 		2) echo " listing ------------" 
