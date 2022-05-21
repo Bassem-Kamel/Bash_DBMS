@@ -1,13 +1,14 @@
 #!/bin/bash 
 
 PS3="enter your choice:"
-path="/home/bassem/iti/DBMS"
+path="$(pwd)/../DBMS"
 
 select c in "Create DB" "List Databases" "Connect" "Drop"
 do
 	case $REPLY in 
 		1) echo " creating -----------"
-		   . /home/bassem/iti/name_validation.sh
+		   . $(pwd)/name_validation_final.sh
+		   echo "<< $? >>"
 		   if [ $? ]
 		   then 
 			   if [ -d $path/$name ]

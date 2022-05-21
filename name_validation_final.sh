@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 while true 
 do
 
@@ -20,14 +18,10 @@ do
 	valid1=true
 	fi
 
-
-
-
 	for ((i=0; i<${#name}; i++ ))
 	do
 
 		c="${name:$i:1}"
-
 
 		if [[ $c = $pat ]]
 		then
@@ -45,13 +39,11 @@ do
 	if [ "$valid1" = true -a "$name_status" = true ]
 	then
 	echo "final status = valid operation "
-	export name
+	export $name
 	break
 	else
 	echo "final status = invalid operation , try again"
 	fi
-
-
 
 
 done
