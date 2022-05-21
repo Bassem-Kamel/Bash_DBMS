@@ -25,13 +25,18 @@ do
 				pwd
 				cd $path
 			else
-				echo "database doesn't exist"
+				echo "!==> connection error : database doesn't exist"
 			fi
 		       	;;
 		4) echo " dropping --------------"
 			read -p "enter the database name :" db_drop
-			cd $path
-			rm -r $path/$db_drop
+			if [ -d $path/$db_drop ]
+			then
+				cd $path
+				rm -r $path/$db_drop
+			else
+				echo "!==> dropping error : database doesn't exist"
+			fi
 		       	;; 
 
 		*) echo "invalid input" ;;
