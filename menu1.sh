@@ -10,7 +10,12 @@ do
 		   . /home/bassem/iti/name_validation.sh
 		   if [ $? ]
 		   then 
-			   mkdir $path/$name
+			   if [ -d $path/$name ]
+			   then
+				   echo "- Error : this database already exists"
+			   else
+				   mkdir $path/$name
+			   fi
 		   fi
 		       	;;
 		2) echo " listing ------------" 
