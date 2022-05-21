@@ -1,29 +1,37 @@
 #!/bin/bash 
 
 PS3="enter your choice:"
+path="/home/bassem/iti/DBMS"
 
-dir_name="bassem"
 select c in "Create DB" "List Databases" "Connect" "Drop"
 do
 	case $REPLY in 
 		1) echo " creating -----------"
-		   . ./name_validation.sh
+		   . /home/bassem/iti/name_validation.sh
 		   if [ $? ]
 		   then 
-			   mkdir /home/bassem/iti/DBMS/$name
+			   mkdir $path/$name
 		   fi
 		       	;;
 		2) echo " listing ------------" 
-			ls /home/bassem/iti/DBMS
+			ls $path
 			;;
 
 		3) echo " connecting ----------"
-			cd /home/bassem/iti/DBMS/$dir_name
-			pwd
+			read -p "enter the database name : " db
+			if [ -d "$path/$db" ]
+			then
+				cd $path/$db
+				pwd
+				cd $path
+			else
+				echo "database doesn't exist"
+			fi
 		       	;;
 		4) echo " dropping --------------"
-			cd /home/bassem/iti/DBMS
-			rm -r /home/bassem/iti/DBMS/$dir_name
+			read -p "enter the database name :" db_drop
+			cd $path
+			rm -r $path/$db_drop
 		       	;; 
 
 		*) echo "invalid input" ;;
