@@ -2,15 +2,8 @@
 
 table_name=$1
 
-if [ -d ./Tables ]
-then 
-	cd ./Tables
-else
-	mkdir ./Tables
-	cd Tables
-fi
 
-touch $table_name $table_name.meta
+touch $table_name .$table_name.meta
 #----------------------------------------------------
 
 numpat="[1-9]"
@@ -30,6 +23,11 @@ done
 
 for ((a=0 ; a<col ; a++ ))
 do 
+	if [ $a -eq 0 ]
+	then 
+		echo "!(Note): this col will be the primary key "
+	fi
+
 	read -p "enter the name of col $a : " arr[$a]
 	. name_validation.sh ${arr[$a]}
 	arr[$a]=$name
@@ -65,5 +63,5 @@ done
 echo "the record = $record and the types = $typs"
 
 echo "$record" > $table_name
-echo "$typs" > $table_name.meta
+echo "$typs" > .$table_name.meta
 
