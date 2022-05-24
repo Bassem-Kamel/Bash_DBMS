@@ -29,7 +29,7 @@ do
 	fi
 
 	read -p "enter the name of col $a : " arr[$a]
-	. name_validation.sh ${arr[$a]}
+	. ../../Bash_project/name_validation.sh ${arr[$a]}
 	arr[$a]=$name
 
 	while true

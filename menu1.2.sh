@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 PS3="(Main menu) -- enter your choice:"
-path="/home/bassem/iti/DBMS"
+path="$(pwd)/../DBMS"
 
 select c in "Create DB" "List Databases" "Connect" "Drop"
 do
@@ -27,7 +27,6 @@ do
 			read -p "enter the database name : " db
 			if [ -d "$path/$db" ]
 			then
-				cd $path/$db
 				. menu2.sh
 			else
 				echo "!==> connection error : database doesn't exist"
