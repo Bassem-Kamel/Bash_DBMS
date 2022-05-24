@@ -9,7 +9,7 @@ scriptpath="$(pwd)"
 cd $dbpath
 
 echo "connected to database $db"
-select c in "Create Table" "List Tables" "Drop"
+select c in "Create Table" "List Tables" "Drop" "Select Table"
 do
 	case $REPLY in 
 		1) echo " -------------- creating table -----------"
@@ -40,8 +40,17 @@ do
 			else
 				echo "!==> dropping error : table doesn't exist"
 			fi
-		       	;; 
+		    ;;
 
+		4) echo " -------- select table --------------"
+			read -p "enter the table name :" t_name
+			if [ -f $dbpath/$t_name ]
+			then
+				. $scriptpath/select_table.sh $t_name $dbpath
+			else
+				echo "!==> selection error : table doesn't exist"
+			fi
+		    ;;
 		*) echo "invalid input" ;;
 
 	esac
