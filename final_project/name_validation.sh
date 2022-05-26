@@ -40,7 +40,6 @@ do
 	if [ "$valid1" = true -a "$name_status" = true ]
 	then
 		info "The name is a valid name"
-		#export name
 		break
 	else
 		error "invalid name, try again"
