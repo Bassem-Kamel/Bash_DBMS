@@ -1,7 +1,7 @@
 #!/bin/bash
 
 table_name=$1
-
+scriptpath=$2
 
 touch $table_name .$table_name.meta
 #----------------------------------------------------
@@ -9,13 +9,13 @@ touch $table_name .$table_name.meta
 numpat="[1-9]"
 while true
 do
-	read -p "enter numbers of columns =" col
+	read -p "enter numbers of columns: " col
 
 	if [[ $col = $numpat ]]
 	then
 		break
 	else
-		echo "-Error : it must be a number greater than 0"
+		error "Error: it must be a number greater than 0"
 	fi
 done
 
@@ -25,21 +25,21 @@ for ((a=0 ; a<col ; a++ ))
 do 
 	if [ $a -eq 0 ]
 	then 
-		echo "!(Note): this col will be the primary key "
+		highlight "Note: this column will be the primary key"
 	fi
 
 	read -p "enter the name of col $a : " ncols[$a]
-	. name_validation.sh ${ncols[$a]}
+	. $scriptpath/name_validation.sh ${ncols[$a]}
 	ncols[$a]=$name
 
 	while true
 	do
-		read -p "enter the type of col $a  [i/s] :" typ[$a]
+		read -p "enter the type of col $a: [i/s]: " typ[$a]
 		if [ "${typ[$a]}" = "i" -o "${typ[$a]}" = "s" ]
 		then
 			break
 		else
-			echo "-Error : not valid value , try again"
+			error "Error: not a valid value, try again"
 		fi
 	done
 
@@ -59,7 +59,7 @@ do
 
 done
 
-echo "the record = $frecord and the types = $typs"
+success "the record = $frecord and the types = $typs"
 
 echo "$frecord" > $table_name
 echo "$typs" > .$table_name.meta

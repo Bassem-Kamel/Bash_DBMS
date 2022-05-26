@@ -16,15 +16,15 @@ do
 			findpk=$(cut -f1 -d: $table_name|grep $pk)
 			if [ $findpk ]
 			then
-				echo "$pk exists "
+				info "$pk exists"
 				R=$(awk -F: -v p="$pk" '{if ($1==p) print$0}'  $table_name)
-				echo "the record : $R "
+				info "the record : $R "
 				break
 			else
-				echo "Error : $pk doesn't exist"
+				error "Error: $pk doesn't exist"
 			fi
 				;;
-		*) echo "invaild PK , it must be a number"
+		*) error "invaild PK, it must be a number"
 			;;
 	esac
 done
@@ -42,14 +42,14 @@ do
 		+([0-9]) )
 		if [ $field -le $col -a $field -gt 0 ]
 		then 
-		echo " valid field"
+		info " valid field"
 		break
 		else
-		echo "invalid field , it must be between 1 and $col"
+		error "invalid field, it must be between 1 and $col"
 		fi
 			;;
 		*) 
-		echo "field must be a number"
+		error "field must be a number"
 		;;
 	esac
 
@@ -67,21 +67,21 @@ do
 		if [ $col_typ = 'i' ]
                 then
                         case $new in
-                        +([0-9]) ) echo " ----- valid value ---- "
+                        +([0-9]) ) info "valid value"
 				R=$(echo $R | sed "s/$old/$new/")
 				break
                                 ;;
-                        *) echo " error invalid value, try again "
+                        *) error "Error: invalid value, try again"
                                 ;;
                         esac
                 elif [ "$col_typ" = 's' ]
                 then
                         case $new in
-                        +([a-zA-Z]) ) echo "------ valid value -----"
+                        +([a-zA-Z0-9_@' '.]) ) success "valid value, the data is updated"
 				R=$(echo $R | sed "s/$old/$new/")
 				break
                                 ;;
-                        *) echo "error invalid value , try again "
+                        *) error "Error: invalid value, try again "
                                 ;;
                         esac
                 fi

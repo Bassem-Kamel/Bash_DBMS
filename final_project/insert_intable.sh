@@ -4,9 +4,8 @@ table_name=$1
 record=''
 shopt -s extglob
 
-
 col=$(head -1 $table_name | tr ':' ' ' | wc -w)
-echo $col
+info "number of columns is $col"
 
 for ((f=1; f < $col+1 ; f++ ))
 do
@@ -16,45 +15,43 @@ do
 
 	if [ $f -eq 1 ]
 	then 
-		echo " --- note the first col is the primary key "
+		highlight "Note: the first column is the primary key"
 	fi
 
 	while true 
 	do
 
-		read -p "--- enter the value of col ($col_name) and type ($col_typ) : " value
+		read -p "enter the value of col ($col_name) that has the type ($col_typ): " value
 
 		if [ $f -eq 1 ]
 		then 
 			found=$(cut -f1 -d: $table_name | grep "$value")
 			if [ $found ]
 			then 
-				echo " Error : Primary key must be unique , enter another value"
+				error "Error: primary key must be unique, try another value"
 				continue
 			fi
 
 		fi
 
-
-
 		if [ $col_typ = 'i' ]
 		then 
 			case $value in 
-			+([0-9]) ) echo " ----- valid value ---- "
+			+([0-9]) ) info "valid value"
 				record=$record':'$value
 				break
 				;;
-			*) echo " error invalid value, try again "
+			*) error "Error: invalid value, try again "
 				;;
 			esac
 		elif [ "$col_typ" = 's' ]
 		then 
 			case $value in 
-			+([a-zA-Z]) ) echo "------ valid value -----"
+			+([a-zA-Z0-9_@' '.]) ) info "valid value"
 				record=$record':'$value
 				break
 				;;
-			*) echo "error invalid value , try again "
+			*) error "Error: invalid value, try again "
 				;;
 			esac
 		fi

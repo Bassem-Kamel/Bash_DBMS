@@ -3,7 +3,7 @@
 shopt -s extglob
 table_name=$1
 
-PS3="-- your choose is : "
+PS3="enter your choice: "
 
 
 # ----------------------------------- get primary key function -------------
@@ -12,7 +12,7 @@ function get_pk {
 while true
 do
 
-                read -p "enter the PK : " pk
+                read -p "enter the PK: " pk
                 findpk=$(cut -f1 -d: $table_name|grep $pk)
 
                 case $pk in
@@ -20,15 +20,15 @@ do
                         +([0-9]) )
                         if [ $findpk ]
                         then
-                                echo "$pk exists "
+                                info "$pk exists "
                                 R=$(awk -F: -v p="$pk" '{if ($1==p) print$0}'  $table_name)
-                                echo "the record : $R "
+                                info "the record : $R"
                                 break
                         else
-                                echo "Error : $pk doesn't exist"
+                                error "Error: $pk doesn't exist"
                         fi
                                 ;;
-                *) echo "invaild PK , it must be a number"
+                *) error "invaild PK, it must be a number"
                         ;;
                 esac
  done
@@ -44,20 +44,22 @@ do
 select D in "Delete All" "Delete a record" "Delete a value" "Back to Menu"
 do
 	case $REPLY in 
-		1) echo " ------deleting all values in the table -----"
-		echo "" > $table_name
+		1) echo "deleting all values in the table"
+		sed -i '2,$d' $table_name
+		success "the data is now deleted"
 		;;
 		2) 
-		echo " ---------- delete a record -------- "
+		echo "delete a record"
 
 		get_pk
 
 
 		sed -i "/$pk/d" $table_name
+		success "record deleted successfully"
 		;;
 
 		3) 
-		echo " ----------- delete a value -----------"
+		echo "delete a value"
 
 		get_pk
 
@@ -68,16 +70,16 @@ do
         		read -p "enter field number : " field
         	case $field in
         	        +([0-9]) )
-                	if [ $field -le $col -a $field -gt 0 ]
+                	if [ $field -le $col -a $field -gt 1 ]
                		then
-                	echo " valid field"
+                	success "valid field"
                	 	break
                 	else
-                	echo "invalid field"
+                	error "invalid field"
                 	fi
                         ;;
                 	*)
-                	echo "field must be a number"
+                	error "field must be a number"
                 	;;
         	esac
 
@@ -87,12 +89,13 @@ do
 		sed -i "/$pk/d" $table_name
 		echo $R >> $table_name
 		sort -n -k1 -t: -o $table_name $table_name
+		success "value deleted"
 
 		;;
 
 	4) break  ;;
 
-	*) echo " Invalid input "
+	*) error " Invalid input "
 
 
 	esac 

@@ -1,6 +1,7 @@
 #!/bin/bash 
 
-PS3="(Main menu)---> enter your choice:"
+source ./styles.sh
+PS3="Main menu -> enter your choice: "
 path="$(pwd)/../DBMS"
 
 while true
@@ -10,53 +11,60 @@ do
 	select c in "Create DB" "List Databases" "Connect" "Drop" "Done"
 	do
 	case $REPLY in 
-		1) echo "-------------- (creating DB) ------------------"
-		   read -p "----> enter the database name : " db_name
+		1) hline "creating DB"
+		   read -p "Enter the database name: " db_name
 		   . name_validation.sh $db_name
 		   if [ $? ]
 		   then 
 			   if [ -d $path/$name ]
 			   then
-				   echo "==! (Error) : this database already exists---- "
+				   error "Error: this database already exists"
+				   hline "%11s" "\n"
 			   else
 				   mkdir $path/$name
+				   success "DB created"
+				   hline "%11s"
 			   fi
 		   fi
 		   break
 		       	;;
-		2) echo "------------------------- (listing) ----------------------" 
-			ls $path
+		2) hline "listing" 
+			success $(ls $path)
+			hline "%7s" "\n"
 			break
 			;;
 
-		3) echo "--------------------- (connecting) ---------------------"
-			read -p "---> enter the database name : " db
+		3) hline "connecting"
+			read -p "Enter the database name: " db
 			if [ -d "$path/$db" ]
 			then
-				cd $path/$db
 				. menu2.sh
-				PS3="(Main menu)---> enter your choice:"
 			else
-				echo "!==> (connection error) : database doesn't exist"
+				error "Connection error: database doesn't exist"
+				hline "%10s"
 			fi
 			break
 		       	;;
-		4) echo "------------------------(dropping) ------------------------"
-			read -p "enter the database name :" db_drop
+		4) hline "dropping"
+			warning "Warning: be carful the database and all its contents might be deleted permanently"
+			read -p "enter the database name: " db_drop
 			if [ -d $path/$db_drop ]
 			then
 				cd $path
 				rm -r $path/$db_drop
+				success "DB dropped successfully"
+				hline "%8s"
 			else
-				echo "!==> (dropping error) : database doesn't exist"
+				error "Dropping error: database doesn't exist"
+				hline "%8s"
 			fi
 			break
 		       	;; 
 
-		5) echo " -------------------------(Done) --------------------------"
+		5) hline "Done"
 			break 2
 			;;
-		*) echo "(!) invalid input, please choose from 1 to 5" ;;
+		*) error "Invalid input, please choose from 1 to 5" ;;
 
 	esac
 	done

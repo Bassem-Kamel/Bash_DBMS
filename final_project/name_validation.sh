@@ -1,7 +1,6 @@
 #!/bin/bash
-
+ 
 	name=$1
-	echo "------- ---------- (name validation) ------------------"
 	pat="[^0-9a-zA-Z_]"
 	name_status="empty"
 	charpat="[^a-zA-Z_]"
@@ -11,7 +10,7 @@ do
 	#check if the first letter is char or not ---------------------
 	if [[ ${name:0:1} = $charpat ]]
 	then 
-	echo "===! (Error):first letter must be char not number or special char"
+	error "Error: first letter must be a character not a number or a special character"
 	valid1=false
 	else
 	valid1=true
@@ -28,7 +27,7 @@ do
 
 		if [[ $c = $pat ]]
 		then
-		echo "===! (Error): the name can't contain special char"
+		error "Error: the name can't contain special character"
 	        name_status=false	
 		break
 		else
@@ -40,11 +39,11 @@ do
 	# if the first letter is char and there is no special char , so the name is valid -------------------
 	if [ "$valid1" = true -a "$name_status" = true ]
 	then
-		echo "============== valid name =============== "
+		info "The name is a valid name"
 		export name
 		break
 	else
-		echo "!== Sorry invalid name , try again"
+		error "invalid name, try again"
 		read -p "(name validation) enter a new name: " name
 	fi
 
