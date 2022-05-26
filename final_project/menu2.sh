@@ -1,7 +1,9 @@
 #!/bin/bash 
 
+
+#change prompt
 PS3="(DB connected) ======> enter your choice:"
-dbpath="$(pwd)"
+
 
 while true
 do
@@ -15,7 +17,7 @@ do
 		   . name_validation.sh $t_name
 		   if [ $? ]
 		   then 
-			   if [ -f $dbpath/$t_name ]
+			   if [ -f ./$t_name ]
 			   then
 				   echo "!== (Error) : this table already exists"
 			   else
@@ -25,15 +27,15 @@ do
 		   break
 		       	;;
 		2) echo " -------------- (listing tables) -------------" 
-			ls $dbpath
+			ls .
 			break
 			;;
 
 		3) echo " ------------ (dropping table) --------------"
 			read -p "---> enter the table name :" t_drop
-			if [ -f $dbpath/$t_drop ]
+			if [ -f ./$t_drop ]
 			then
-				rm $dbpath/$t_drop
+				rm ./$t_drop
 			else
 				echo "!==> (dropping error) : table doesn't exist"
 			fi
@@ -43,7 +45,7 @@ do
 
 		4) echo " ------------------- (insert into table) ------------------- "
 			read -p "---> enter the table name : " t_insert
-			if [ -f $dbpath/$t_insert ]
+			if [ -f ./$t_insert ]
 			then
 			       . insert_intable.sh $t_insert	
 
@@ -53,12 +55,9 @@ do
 			break
 			;;	
 
-
-
-
 		5) echo " ------------------- (delete from table) -----------------"
 			read -p "---> enter the table name : " t_delete
-			if [ -f $dbpath/$t_delete ]
+			if [ -f ./$t_delete ]
 			then 
 				. delete_ftable.sh $t_delete
 				PS3="(DB connected) =====> enter your choice:"
@@ -71,7 +70,7 @@ do
 
 		6) echo " -------------- (update into table) ----------------"
 			read -p "---> enter the table name : " t_update
-			if [ -f $dbpath/$t_update ]
+			if [ -f ./$t_update ]
 			then 
 				. update_table.sh $t_update
 			else
@@ -84,9 +83,10 @@ do
 		7) echo " ------------------ (select from table) ---------------- "
 
 			read -p "---> enter the table name : " t_select
-			if [ -f $dbpath/$t_select ]
+			if [ -f ./$t_select ]
 			then
-				. select_table.sh $t_select
+				. select_table.sh $t_select 
+				PS3="(DB connected) ======> enter your choice:"
 			else
 				echo "!==> (selection error) : table doesn't exist"
 			fi
@@ -95,9 +95,9 @@ do
 
 		8) echo " ------------------ (live preview) ----------------"
 			read -p "enter the table name : " t_preview
-			if [ -f $dbpath/$t_preview ]
+			if [ -f ./$t_preview ]
 			then
-				gnome-terminal -- live_preview.sh $t_preview $dbpath > /dev/null
+				gnome-terminal -- live_preview.sh $t_preview . > /dev/null
 			else
 				echo "!==> (preview error) : table doesn't exist"
 			fi
