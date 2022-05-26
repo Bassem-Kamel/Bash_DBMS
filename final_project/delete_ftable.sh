@@ -13,7 +13,7 @@ while true
 do
 
                 read -p "enter the PK: " pk
-                findpk=$(cut -f1 -d: $table_name|grep $pk)
+                findpk=$(cut -f1 -d: $table_name|grep -w $pk)
 
                 case $pk in
 

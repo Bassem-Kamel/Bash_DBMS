@@ -13,7 +13,7 @@ do
 	case $pk in
 
 		+([0-9]) ) 
-			findpk=$(cut -f1 -d: $table_name|grep $pk)
+			findpk=$(cut -f1 -d: $table_name|grep -w $pk)
 			if [ $findpk ]
 			then
 				info "$pk exists"
