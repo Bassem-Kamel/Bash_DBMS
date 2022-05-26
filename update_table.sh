@@ -4,10 +4,7 @@ shopt -s extglob
 
 table_name=$1
 
-
-#sort -n -k1 -t: $table_name  ---------
-
-
+# ---------------- get the pk and check if the value is valid ----------------------------
 while true
 do
 
@@ -35,6 +32,7 @@ done
 
 col=$(head -1 .$table_name.meta | tr ':' ' ' | wc -w)
 
+#------------------------------ get the field and check if the value is valid ---------------------------
 while true
 do
 
@@ -61,7 +59,7 @@ col_typ=$(head -1 .$table_name.meta | cut -f$field -d:)
 
 old=$(echo $R | cut -f$field -d:)
 
-
+# --------------------------------- get the new value and check if it's valid ------------------
 while true
 do
 	read -p "enter the new value : " new
@@ -89,7 +87,7 @@ do
                 fi
 
 done
-
+#------------------------------------------------ delete old line and append the new one -----------------------
 sed -i "/$pk/d" $table_name
 echo $R >> $table_name
 sort -n -k1 -t: -o $table_name $table_name
