@@ -8,10 +8,11 @@ PS3="(DB connected) ======> enter your choice:"
 while true
 do
 
-
+	# this menu provide some actions to do with tables inside certain database
 	select c in "Create Table" "List Tables" "Drop" "Insert into table" "Delete from table" "update into table" "Select from table" "Live preview" "Back to main menu"
 	do
 	case $REPLY in 
+		# Take the table name and create it after check the name validation
 		1) echo " -------------- (creating table) -----------"
 		   read -p "enter the name of table : " t_name
 		   . name_validation.sh $t_name
@@ -26,11 +27,12 @@ do
 		   fi
 		   break
 		       	;;
+		# list all tables in this database
 		2) echo " -------------- (listing tables) -------------" 
 			ls .
 			break
 			;;
-
+		# drop table after check if it exists or not
 		3) echo " ------------ (dropping table) --------------"
 			read -p "---> enter the table name :" t_drop
 			if [ -f ./$t_drop ]
@@ -42,7 +44,7 @@ do
 			break
 		       	;; 
 
-
+		# if the table exists so we can insert values into it
 		4) echo " ------------------- (insert into table) ------------------- "
 			read -p "---> enter the table name : " t_insert
 			if [ -f ./$t_insert ]
@@ -54,7 +56,7 @@ do
 			fi
 			break
 			;;	
-
+		# delete table if we don't need it anymore
 		5) echo " ------------------- (delete from table) -----------------"
 			read -p "---> enter the table name : " t_delete
 			if [ -f ./$t_delete ]
@@ -67,7 +69,7 @@ do
 			break
 			;;
 
-
+		# update values in the table
 		6) echo " -------------- (update into table) ----------------"
 			read -p "---> enter the table name : " t_update
 			if [ -f ./$t_update ]
@@ -79,7 +81,7 @@ do
 			break
 			;;
 
-
+		# display some values from the table
 		7) echo " ------------------ (select from table) ---------------- "
 
 			read -p "---> enter the table name : " t_select
@@ -92,7 +94,7 @@ do
 			fi
 			break
 			;;
-
+		# new feature --> live preview of the table to see all the changes live
 		8) echo " ------------------ (live preview) ----------------"
 			read -p "enter the table name : " t_preview
 			if [ -f ./$t_preview ]
@@ -103,7 +105,7 @@ do
 			fi
 			break
 			;;
-
+		# back to main menu
 		9) echo " --------------- (Back to Main menu) ---------------"
 			break 2
 			;;
