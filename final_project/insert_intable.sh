@@ -1,13 +1,14 @@
 #!/bin/bash
 
+# create empty record to save data in it
 table_name=$1
 record=''
 shopt -s extglob
 
-
+# get number of columns in the table
 col=$(head -1 $table_name | tr ':' ' ' | wc -w)
-echo $col
 
+# loop over every column and print its name and datatype
 for ((f=1; f < $col+1 ; f++ ))
 do
 
@@ -19,6 +20,7 @@ do
 		echo " --- note the first col is the primary key "
 	fi
 
+	# after get the values from the user , check them if valid save them in the table
 	while true 
 	do
 
@@ -61,7 +63,7 @@ do
 	done
 	echo $value
 done
-record=$(echo $record | sed 's/://') #remove first : 
-echo $record >> $table_name
+record=$(echo $record | sed 's/://') #remove first redandant colon : 
+echo $record >> $table_name # save the record in the table
 
 
