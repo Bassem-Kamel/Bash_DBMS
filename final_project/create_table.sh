@@ -3,9 +3,11 @@
 table_name=$1
 scriptpath=$2
 
+
+# create two file one for colmuns name and data (table_name) , a hidden one for datatypes (.table_name.meta)
 touch $table_name .$table_name.meta
 #----------------------------------------------------
-
+# get number of cols from user and check the value
 numpat="[1-9]"
 while true
 do
@@ -20,7 +22,9 @@ do
 done
 
 
-
+# take name of every column and its datatype , check name for every column and check the value of datatype
+# ncol : array contain the columns names 
+# typ : array contain all datatypes of the table
 for ((a=0 ; a<col ; a++ ))
 do 
 	if [ $a -eq 0 ]
@@ -48,7 +52,7 @@ do
 done
 #-------------------------------------------------------------------
 
-
+# create the first record which contain the columns name and the datatypes 
 frecord="${ncols[0]}"
 typs="${typ[0]}"
 

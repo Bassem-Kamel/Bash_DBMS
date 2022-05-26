@@ -7,7 +7,7 @@ path="$(pwd)/../DBMS"
 while true
 do
 
-
+	#Main menu :
 	select c in "Create DB" "List Databases" "Connect" "Drop" "Done"
 	do
 	case $REPLY in 

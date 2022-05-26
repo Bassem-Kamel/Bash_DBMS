@@ -19,7 +19,7 @@ do
 		   . $scriptpath/name_validation.sh $t_name
 		   if [ $? ]
 		   then 
-			   if [ -f $dbpath/$t_name ]
+			   if [ -f ./$t_name ]
 			   then
 				   error "Error: this table already exists"
 				   hline "%14s"
