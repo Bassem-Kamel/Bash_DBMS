@@ -20,15 +20,16 @@ do
 	case $REPLY in 
 		1) hline "creating DB"
 		   read -p "Enter the database name: " db_name
-		   . name_validation.sh $db_name
+		   . ./name_validation.sh $db_name
 		   if [ $? ]
 		   then 
-			   if [ -d $path/$name ]
+		   		db_name=$name
+			   if [ -d $path/$db_name ]
 			   then
 				   error "Error: this database already exists"
 				   hline "%11s" "\n"
 			   else
-				   mkdir $path/$name
+				   mkdir $path/$db_name
 				   success "DB created"
 				   hline "%11s"
 			   fi
@@ -45,7 +46,7 @@ do
 			read -p "Enter the database name: " db
 			if [ -d "$path/$db" ]
 			then
-				. menu2.sh
+				. ./menu2.sh
 				PS3="Main menu -> enter your choice: "
 			else
 				error "Connection error: database doesn't exist"
@@ -58,7 +59,6 @@ do
 			read -p "enter the database name: " db_drop
 			if [ -d $path/$db_drop ]
 			then
-				cd $path
 				rm -r $path/$db_drop
 				success "DB dropped successfully"
 				hline "%8s"
