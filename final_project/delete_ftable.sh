@@ -54,7 +54,7 @@ do
 		get_pk
 
 
-		sed -i "/\b$pk\b/d" $table_name
+		sed -i "/^\b$pk\b/d" $table_name
 		success "record deleted successfully"
 		;;
 
