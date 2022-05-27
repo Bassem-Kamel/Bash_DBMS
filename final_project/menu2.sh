@@ -42,6 +42,7 @@ do
 			if [ -f $dbpath/$t_drop ]
 			then
 				rm $dbpath/$t_drop
+				rm $dbpath/.$t_drop.meta
 				success "the table dropped successfully"
 				hline "%14s"
 			else
@@ -72,7 +73,7 @@ do
 			then 
 				. $scriptpath/delete_ftable.sh $t_delete
 				hline "%17s"
-				#PS3="(DB connected) -> enter your choice:"
+				PS3="(DB connected) ---> enter your choice:"
 			else
 				error "Deletion error: the table doesn't exist"
 				hline "%17s"
@@ -103,6 +104,7 @@ do
 			then
 				. $scriptpath/select_table.sh $t_select $dbpath
 				hline "%17s"
+				PS3="(DB connected) ---> enter your choice:"
 			else
 				error "selection error: the table doesn't exist"
 				hline "%17s"
