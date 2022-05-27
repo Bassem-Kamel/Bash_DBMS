@@ -1,8 +1,15 @@
 #!/bin/bash 
 
 source ./styles.sh
+
 PS3="Main menu -> enter your choice: "
 path="$(pwd)/../DBMS"
+
+# checking if the DBMS exists in the parent folder
+if [ ! -d path ]
+then
+	mkdir -v $path
+fi
 
 while true
 do

@@ -126,7 +126,7 @@ do
 			;;
 
 		9) hline "Back to Main menu"
-			cd $path
+			cd $scriptpath
 			break 2
 			hline "%17s"
 			;;
