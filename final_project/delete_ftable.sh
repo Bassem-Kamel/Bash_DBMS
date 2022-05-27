@@ -3,7 +3,7 @@
 shopt -s extglob
 table_name=$1
 
-PS3="enter your choice: "
+PS3="--> enter your choice : "
 
 
 # ----------------------------------- get primary key function -------------
@@ -13,7 +13,7 @@ while true
 do
 
                 read -p "enter the PK: " pk
-                findpk=$(cut -f1 -d: $table_name|grep -w $pk)
+                findpk=$(cut -f1 -d: $table_name|grep -w "$pk")
 
                 case $pk in
 
@@ -54,7 +54,7 @@ do
 		get_pk
 
 
-		sed -i "/$pk/d" $table_name
+		sed -i "/\b$pk\b/d" $table_name
 		success "record deleted successfully"
 		;;
 
@@ -86,7 +86,7 @@ do
 		done
 		old=$(echo $R | cut -f$field -d:)
 		R=$(echo $R | sed "s/$old/' '/")
-		sed -i "/$pk/d" $table_name
+		sed -i "/\b$pk\b/d" $table_name
 		echo $R >> $table_name
 		sort -n -k1 -t: -o $table_name $table_name
 		success "value deleted"

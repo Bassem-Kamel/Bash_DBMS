@@ -88,7 +88,7 @@ do
 
 done
 #------------------------------------------------ delete old line and append the new one -----------------------
-sed -i "/$pk/d" $table_name
+sed -i "/\b$pk\b/d" $table_name
 echo $R >> $table_name
 sort -n -k1 -t: -o $table_name $table_name
 #cat $table_name

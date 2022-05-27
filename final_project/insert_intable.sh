@@ -28,7 +28,7 @@ do
 
 		if [ $f -eq 1 ]
 		then 
-			found=$(cut -f1 -d: $table_name | grep "$value")
+			found=$(cut -f1 -d: $table_name | grep -w "$value")
 			if [ $found ]
 			then 
 				error "Error: primary key must be unique, try another value"
@@ -59,7 +59,6 @@ do
 			esac
 		fi
 	done
-	echo $value
 done
 record=$(echo $record | sed 's/://') #remove first redandant colon : 
 echo $record >> $table_name # save the record in the table
