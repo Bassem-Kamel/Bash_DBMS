@@ -39,6 +39,7 @@ do
 			if [ -d "$path/$db" ]
 			then
 				. menu2.sh
+				PS3="Main menu -> enter your choice: "
 			else
 				error "Connection error: database doesn't exist"
 				hline "%10s"

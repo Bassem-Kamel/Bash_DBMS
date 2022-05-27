@@ -28,7 +28,7 @@ do
 		if [[ $c = $pat ]]
 		then
 		error "Error: the name can't contain special character"
-	        name_status=false	
+	    name_status=false	
 		break
 		else
 		name_status=true
@@ -40,7 +40,6 @@ do
 	if [ "$valid1" = true -a "$name_status" = true ]
 	then
 		info "The name is a valid name"
-		export name
 		break
 	else
 		error "invalid name, try again"
