@@ -57,14 +57,21 @@ do
 		4) hline "dropping"
 			warning "Warning: be carful the database and all its contents might be deleted permanently"
 			read -p "enter the database name: " db_drop
-			if [ -d $path/$db_drop ]
+			#checking if the variable is empty or not
+			if test -z "$db_drop"
 			then
-				rm -r $path/$db_drop
-				success "DB dropped successfully"
-				hline "%8s"
+				error "enter a valid name"
 			else
-				error "Dropping error: database doesn't exist"
-				hline "%8s"
+				#checking if the directory exists or not
+				if [ -d $path/$db_drop ];
+				then
+					rm -r $path/$db_drop
+					success "DB dropped successfully"
+					hline "%8s"
+				else
+					error "Dropping error: database doesn't exist"
+					hline "%8s"
+				fi
 			fi
 			break
 		       	;; 
