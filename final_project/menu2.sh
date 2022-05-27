@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-PS3="DB connected ==> enter your choice:"
+PS3="DB connected -> enter your choice: "
 dbpath="$(pwd)/../DBMS/$db"
 #holding a reference to the directory containing the scripts
 scriptpath="$(pwd)"
@@ -74,7 +74,7 @@ do
 			then 
 				. $scriptpath/delete_ftable.sh $t_delete
 				hline "%17s"
-				PS3="(DB connected) ---> enter your choice:"
+				PS3="DB connected -> enter your choice: "
 			else
 				error "Deletion error: the table doesn't exist"
 				hline "%17s"
@@ -105,7 +105,7 @@ do
 			then
 				. $scriptpath/select_table.sh $t_select $dbpath
 				hline "%17s"
-				PS3="(DB connected) ---> enter your choice:"
+				PS3="DB connected -> enter your choice: "
 			else
 				error "selection error: the table doesn't exist"
 				hline "%17s"
