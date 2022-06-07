@@ -1,9 +1,9 @@
 #!/bin/bash 
 
 PS3="DB connected -> enter your choice: "
-dbpath="$(pwd)/../DBMS/$db"
+dbpath="$HOME/iti/Bash_project/DBMS/$db_connect"
 #holding a reference to the directory containing the scripts
-scriptpath="$(pwd)"
+scriptpath="$HOME/iti/Bash_project/final_project"
 
 #going into the db directory
 cd $dbpath

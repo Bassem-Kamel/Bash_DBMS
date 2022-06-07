@@ -3,7 +3,7 @@
 source ./styles.sh
 
 PS3="Main menu -> enter your choice: "
-path="$(pwd)/../DBMS"
+path="$HOME/iti/Bash_project/DBMS"
 
 # checking if the DBMS exists in the parent folder
 if [ ! -d $path ]
@@ -43,14 +43,21 @@ do
 			;;
 
 		3) hline "connecting"
-			read -p "Enter the database name: " db
-			if [ -d "$path/$db" ]
+			read -p "Enter the database name: " db_connect
+			#checking if the variable is empty or not
+			if [ "$db_connect" ]
 			then
-				. ./menu2.sh
-				PS3="Main menu -> enter your choice: "
+				if [ -d "$path/$db_connect" ]
+				then
+					. ./menu2.sh
+					PS3="Main menu -> enter your choice: "
+				else
+					error "Connection error: database doesn't exist"
+					hline "%10s"
+				fi
 			else
-				error "Connection error: database doesn't exist"
-				hline "%10s"
+				error "Enter a valid database name"
+				
 			fi
 			break
 		       	;;
@@ -58,9 +65,9 @@ do
 			warning "Warning: be carful the database and all its contents might be deleted permanently"
 			read -p "enter the database name: " db_drop
 			#checking if the variable is empty or not
-			if test -z "$db_drop"
+			if [ -z "$db_drop" ]
 			then
-				error "enter a valid name"
+				error "Enter a valid database name"
 			else
 				#checking if the directory exists or not
 				if [ -d $path/$db_drop ];
