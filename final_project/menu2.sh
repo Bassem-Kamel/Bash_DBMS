@@ -21,7 +21,7 @@ do
 		   if [ $? ]
 		   then 
 		   		t_name=$name
-			   if [ -f ./$t_name ]
+			   if [ -f $dbpath/$t_name ]
 			   then
 				   error "Error: this table already exists"
 				   hline "%14s"

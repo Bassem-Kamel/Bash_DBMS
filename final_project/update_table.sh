@@ -40,12 +40,12 @@ do
 
 	case $field in
 		+([0-9]) )
-		if [ $field -le $col -a $field -gt 0 ]
+		if [ $field -le $col -a $field -gt 1 ]
 		then 
 		info " valid field"
 		break
 		else
-		error "invalid field, it must be between 1 and $col"
+		error "invalid field, it must be between 2 and $col"
 		fi
 			;;
 		*) 
