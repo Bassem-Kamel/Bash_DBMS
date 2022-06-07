@@ -7,14 +7,15 @@ scriptpath="$HOME/iti/Bash_project/final_project"
 
 #going into the db directory
 cd $dbpath
-
+hline "welcome inside $db_connect"
 while true
 do
 
 	select c in "Create Table" "List Tables" "Drop" "Insert into table" "Delete from table" "update into table" "Select from table" "Live preview" "Back to main menu"
 	do
 	case $REPLY in 
-		1) hline "creating table"
+		1) clear
+		   hline "creating table"
 		   read -p "enter the name of table : " t_name
 		   . $scriptpath/name_validation.sh $t_name
 		   if [ $? ]
@@ -31,13 +32,17 @@ do
 		   fi
 		   break
 		       	;;
-		2) hline "listing tables" 
+		2) clear
+			hline "listing tables" 
 			success $(ls $dbpath)
 			hline "%14s"
 			break
 			;;
 
-		3) hline "dropping table"
+		3) clear
+			hline "dropping table"
+			success $(ls $dbpath)
+			hline "%14s"
 			warning "Warning: The table and its contents will be deleted permanently"
 			read -p "enter the table name: " t_drop
 			if [ -f $dbpath/$t_drop ]
@@ -54,7 +59,10 @@ do
 		       	;; 
 
 
-		4) hline "insert into table"
+		4) clear
+			hline "insert into table"
+			success $(ls $dbpath)
+			hline "%14s"
 			read -p "enter the table name: " t_insert
 			if [ -f $dbpath/$t_insert ]
 			then
@@ -67,7 +75,10 @@ do
 			break
 			;;	
 
-		5) hline "delete from table"
+		5) clear
+			hline "delete from table"
+			success $(ls $dbpath)
+			hline "%14s"
 			warning "Warning: be carful with your data"
 			read -p "enter the table name: " t_delete
 			if [ -f $dbpath/$t_delete ]
@@ -83,8 +94,11 @@ do
 			;;
 
 
-		6) hline "update table"
-		warning "Warning: be carful with your data"
+		6) clear
+			hline "update table"
+			success $(ls $dbpath)
+			hline "%14s"
+			warning "Warning: be carful with your data"
 			read -p "enter the table name: " t_update
 			if [ -f $dbpath/$t_update ]
 			then 
@@ -98,8 +112,10 @@ do
 			;;
 
 
-		7) hline "select from table"
-
+		7) clear
+			hline "select from table"
+			success $(ls $dbpath)
+			hline "%14s"
 			read -p "enter the table name: " t_select
 			if [ -f $dbpath/$t_select ]
 			then
@@ -113,7 +129,10 @@ do
 			break
 			;;
 
-		8) hline "live preview"
+		8) clear
+			hline "live preview"
+			success $(ls $dbpath)
+			hline "%14s"
 			read -p "enter the table name: " t_preview
 			if [ -f $dbpath/$t_preview ]
 			then
@@ -125,7 +144,8 @@ do
 			break
 			;;
 
-		9) hline "Back to Main menu"
+		9) clear
+			hline "Back to Main menu"
 			cd $scriptpath
 			break 2
 			hline "%17s"

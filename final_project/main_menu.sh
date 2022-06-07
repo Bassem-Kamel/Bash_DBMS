@@ -18,7 +18,8 @@ do
 	select c in "Create DB" "List Databases" "Connect" "Drop" "Done"
 	do
 	case $REPLY in 
-		1) hline "creating DB"
+		1) clear
+		   hline "creating DB"
 		   read -p "Enter the database name: " db_name
 		   . ./name_validation.sh $db_name
 		   if [ $? ]
@@ -34,15 +35,20 @@ do
 				   hline "%11s"
 			   fi
 		   fi
+		   
 		   break
 		       	;;
-		2) hline "listing" 
+		2) clear
+			hline "listing" 
 			success $(ls $path)
 			hline "%7s" "\n"
 			break
 			;;
 
-		3) hline "connecting"
+		3) clear
+			hline "connecting"
+			success $(ls $path)
+			hline "%7s" "\n"
 			read -p "Enter the database name: " db_connect
 			#checking if the variable is empty or not
 			if [ "$db_connect" ]
@@ -61,7 +67,10 @@ do
 			fi
 			break
 		       	;;
-		4) hline "dropping"
+		4) clear
+			hline "dropping"
+			success $(ls $path)
+			hline "%7s" "\n"
 			warning "Warning: be carful the database and all its contents might be deleted permanently"
 			read -p "enter the database name: " db_drop
 			#checking if the variable is empty or not
