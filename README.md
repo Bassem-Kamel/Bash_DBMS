@@ -14,6 +14,33 @@
 4. run the main_menu.sh: `./main_menu.sh`
 5. voila! now the application is running
 
+## Validation rules
+
+### Database
+
+1. The first character must be within the range 0-9a-zA-Z\_ characters
+2. The rest of the name will be within a-zA-Z\_ characters range
+3. The name can't be empty
+
+### Table
+
+1. The first character must be within the range 0-9a-zA-Z\_ characters
+2. The rest of the name will be within a-zA-Z\_ characters range
+3. The name can't be empty
+
+### Table columns
+
+1. The first character must be within the range 0-9a-zA-Z\_ characters
+2. The rest of the name will be within a-zA-Z\_ characters range
+3. The name can't be empty
+
+### Column types
+
+1. Integer represented by an i character to store digits
+2. String repesented by an s character to store a series of characters as a string
+
+### Database
+
 ## Authors
 
 [Bassem Kamel](https://www.linkedin.com/in/bassem-kamel-22900) &
