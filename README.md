@@ -6,6 +6,21 @@
   DevOps track in ITI.
 - It is a database management system that is made entirely with Bash scripting.
 
+## Features
+
+1. create database
+2. drop database
+3. list available databases
+4. create table with primary keys support
+5. drop table
+6. insert into table
+7. update table records
+8. delete values from table
+9. delete records from tables
+10. select table
+11. select certain columns from a table
+12. live preview a table
+
 ## To fire it up
 
 1. navigate to the directory final_project
