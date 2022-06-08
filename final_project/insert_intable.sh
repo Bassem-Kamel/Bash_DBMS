@@ -62,5 +62,6 @@ do
 done
 record=$(echo $record | sed 's/://') #remove first redandant colon : 
 echo $record >> $table_name # save the record in the table
+sort -n -k1 -t: -o $table_name $table_name
 
 
