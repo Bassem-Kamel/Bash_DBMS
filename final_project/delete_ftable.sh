@@ -60,7 +60,7 @@ do
 			2) clear
 			echo "delete a record"
 			get_pk
-			sed -i "/^\b$pk\b/d" $table_name
+			sed -i "/^\b$pk\b/d" $table_name # \b .. \b to match exact value
 			success "record deleted successfully"
 			hline "%14s"
 			break
@@ -76,7 +76,7 @@ do
 					read -p "enter field number : " field
 				case $field in
 						+([0-9]) )
-						if [ $field -le $col -a $field -gt 1 ]
+						if [ $field -le $col -a $field -gt 1 ] # filed number is less than or equal col_nums and greater than 1
 						then
 						success "valid field"
 						break

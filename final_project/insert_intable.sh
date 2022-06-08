@@ -4,7 +4,7 @@
 table_name=$1
 record=''
 shopt -s extglob
-
+# get the number of cols
 col=$(head -1 $table_name | tr ':' ' ' | wc -w)
 info "number of columns is $col"
 
@@ -28,6 +28,7 @@ do
 
 		if [ $f -eq 1 ]
 		then 
+			#check the value against the existing pks
 			found=$(cut -f1 -d: $table_name | grep -w "$value")
 			if [ $found ]
 			then 

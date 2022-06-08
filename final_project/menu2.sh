@@ -116,7 +116,7 @@ do
 		7) clear
 			hline "select from table"
 			success $(ls $dbpath)
-			hline "%14s"
+			hline "%17s"
 			read -p "enter the table name: " t_select
 			if [ -f $dbpath/$t_select ]
 			then
