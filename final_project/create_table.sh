@@ -41,6 +41,7 @@ do
 		read -p "enter the type of col $a: [i/s]: " typ[$a]
 		if [ "${typ[$a]}" = "i" -o "${typ[$a]}" = "s" ]
 		then
+			hline "%14s"
 			break
 		else
 			error "Error: not a valid value, try again"
