@@ -133,7 +133,7 @@ do
 		8) clear
 			hline "live preview"
 			success $(ls $dbpath)
-			hline "%14s"
+			hline "%12s"
 			read -p "enter the table name: " t_preview
 			if [ -f $dbpath/$t_preview ]
 			then
