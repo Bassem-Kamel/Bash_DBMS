@@ -26,7 +26,7 @@ do
             hline "%${#table}s"
             read -p "enter the name of column: " columnName
             #checking if the column exists in the first row of the file > aka the columns
-            if head -1 ./$table | grep -q $columnName
+            if head -1 ./$table | grep -q $columnName  # use -q (quiet mode)
             then
             #getting the first line then piping it to sed to repllace the delimeter with \n
             # so that every word in the head is on new line then piping it to nl to add line numbers
