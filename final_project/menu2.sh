@@ -81,6 +81,7 @@ do
 			hline "%14s"
 			warning "Warning: be carful with your data"
 			read -p "enter the table name: " t_delete
+			hline "%14s"
 			if [ -f $dbpath/$t_delete ]
 			then 
 				. $scriptpath/delete_ftable.sh $t_delete

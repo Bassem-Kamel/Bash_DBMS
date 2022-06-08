@@ -1,7 +1,6 @@
 #!/bin/bash
 
 shopt -s extglob
-
 table_name=$1
 
 # ---------------- get the pk and check if the value is valid ----------------------------
@@ -16,9 +15,9 @@ do
 			findpk=$(cut -f1 -d: $table_name|grep -w $pk)
 			if [ $findpk ]
 			then
-				info "$pk exists"
+				info "($pk) exists"
 				R=$(awk -F: -v p="$pk" '{if ($1==p) print$0}'  $table_name)
-				info "the record : $R "
+				info "the record == $R "
 				break
 			else
 				error "Error: $pk doesn't exist"
@@ -42,10 +41,11 @@ do
 		+([0-9]) )
 		if [ $field -le $col -a $field -gt 1 ]
 		then 
-		info " valid field"
-		break
+			info " valid field"
+			hline "%14s"
+			break
 		else
-		error "invalid field, it must be between 2 and $col"
+			error "invalid field, it must be between 2 and $col"
 		fi
 			;;
 		*) 
@@ -65,33 +65,34 @@ do
 	read -p "enter the new value : " new
 	
 		if [ $col_typ = 'i' ]
-                then
-                        case $new in
-                        +([0-9]) ) info "valid value"
+        then
+            case $new in
+				+([0-9]) ) info "valid value, the data is updated"
+				hline "%14s"
 				R=$(echo $R | sed "s/$old/$new/")
 				break
-                                ;;
-                        *) error "Error: invalid value, try again"
-                                ;;
-                        esac
-                elif [ "$col_typ" = 's' ]
-                then
-                        case $new in
-                        +([a-zA-Z0-9_@' '.]) ) success "valid value, the data is updated"
-				R=$(echo $R | sed "s/$old/$new/")
-				break
-                                ;;
-                        *) error "Error: invalid value, try again "
-                                ;;
-                        esac
-                fi
+					;;
+                *) error "Error: invalid value, try again"
+                    ;;
+            esac
+        elif [ "$col_typ" = 's' ]
+        then
+			case $new in
+			+([a-zA-Z0-9_@' '.]) ) success "valid value, the data is updated"
+			hline "%14s"
+			R=$(echo $R | sed "s/$old/$new/")
+			break
+					;;
+			*) error "Error: invalid value, try again "
+					;;
+			esac
+        fi
 
 done
 #------------------------------------------------ delete old line and append the new one -----------------------
 sed -i "/\b$pk\b/d" $table_name
 echo $R >> $table_name
 sort -n -k1 -t: -o $table_name $table_name
-#cat $table_name
 
 
 
