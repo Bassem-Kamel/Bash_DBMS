@@ -5,6 +5,7 @@
 - This project was made as a requirement to pass the bash scripting course in the intensive code camp
   DevOps track in ITI.
 - It is a database management system that is made entirely with Bash scripting.
+- https://drive.google.com/file/d/1nv3rP9QLYcCInerzPsZztxmNUlTy_j8b/view?usp=sharing
 
 ## Features
 
